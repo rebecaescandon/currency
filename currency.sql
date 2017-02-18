@@ -1,0 +1,6 @@
+CREATE TABLE rates (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    currency VARCHAR(40) NOT NULL,
+    rate FLOAT NOT NULL,
+    currentdate DATE NOT NULL
+);
