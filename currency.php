@@ -1,10 +1,10 @@
 <?php
 
-$opts = getopt("rhc:");
+$opts = getopt("r:c:h");
 
 foreach (array_keys($opts) as $opt) switch ($opt) {
   case 'r':
-    import();
+    import($opts['r']);
     break;
   case 'c':
     convert($opts['c']);
@@ -19,8 +19,7 @@ echo "Thanks...";
 /**
  * Implements XML import cli
  */
-function import() {
-  $provider = "https://wikitech.wikimedia.org/wiki/Fundraising/tech/Currency_conversion_sample?ctype=text/xml&action=raw";
+function import($provider) {
   if (url_exists($provider)) {
     $mysqli = db_access();
     if ($mysqli) {
@@ -165,7 +164,7 @@ function get_change($currency, $amount, $mysqli) {
   function help_text(){
     $output = '';
     $output .= "--------- Usage ---------" . "\n";
-    $output .= "      -r : Run Importer " . "\n";
+    $output .= "      -r [url] : Run Importer " . "\n";
     $output .= "      -c [values]: Convert values enter to USD" . "\n";
     $output .= "                   Ex: -c 'CZK 62.5'" . "\n";
     $output .= "                   Ex: -c 'JPY 5000,CZK 62.5'" . "\n";
